@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +9,44 @@ export class AppComponent implements OnInit {
 
   title = 'app';
   url : string;
+  data : any;
 
-  constructor(public sanitizer: DomSanitizer){}
+  constructor(){}
 
   ngOnInit() {
-    this.url = 'https://en.wikipedia.org/wiki/Hollywood';
+    this.data = [
+      {
+        "title" : "Hollywood",
+        "description" : "International Movie",
+        "link" : "https://en.wikipedia.org/wiki/Hollywood"
+      },
+      {
+        "title" : "Bollywood",
+        "description" : "Indian Movie",
+        "link" : "https://en.wikipedia.org/wiki/Bollywood"
+      },
+      {
+        "title" : "Ollywood",
+        "description" : "Odia Movie",
+        "link" : "https://en.wikipedia.org/wiki/Cinema_of_Odisha"
+      }
+    ]
+
+    this.data.forEach(element => {
+      if(element.link && !this.url){
+        this.url = element.link;
+      }
+    });
+    
   }
 
   switchTo(page){
-    if(page === "Hollywood"){
-      this.url = 'https://en.wikipedia.org/wiki/Hollywood';
-    }else if(page === "Bollywood"){
-      this.url = 'https://en.wikipedia.org/wiki/Bollywood';
-    }else{
-      this.url = 'https://en.wikipedia.org/wiki/Cinema_of_Odisha';
-    }
+    this.url = "";
+    this.data.forEach(element => {
+      if(element.title === page && this.url === ""){
+        this.url = element.link;
+      }
+    });
   }
+
 }

@@ -1,7 +1,5 @@
-<div>
-  <a (click)="switchTo('Hollywood')">&nbsp; &nbsp; Hollywood &nbsp; &nbsp;</a>
-  <a (click)="switchTo('Bollywood')">&nbsp; &nbsp; Bollywood &nbsp; &nbsp;</a>
-  <a (click)="switchTo('Ollywood')">&nbsp; &nbsp; Ollywood &nbsp; &nbsp;</a>
-</div>
+<span *ngFor="let items of data">
+  <span (click)="switchTo(items.title)">&nbsp; &nbsp; {{items.title}} &nbsp; &nbsp;</span>
+</span>
 <br><br>
-<iframe width="100%" height="400" frameborder="0" style="border:0" [src]='sanitizer.bypassSecurityTrustResourceUrl(url)' allowfullscreen></iframe>
+<app-iframe [url]="url"></app-iframe>
